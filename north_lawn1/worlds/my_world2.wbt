@@ -1,0 +1,593 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Door.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/street_furniture/protos/SnackStand.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/school_furniture/protos/Blackboard.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/tables/protos/Table.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/chairs/protos/Chair.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/MarbleTiles.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/CarpetFibers.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Roughcast.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/stairs/protos/StraightStairs.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/VarnishedPine.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/stairs/protos/StraightStairsRail.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/tables/protos/RoundTable.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.27265386321240115 0.21775683768382895 0.9371455759471373 1.8565661655064765
+  position -8.268150689243408 -29.996651396659523 26.972910362034956
+  follow "my_robot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Robot {
+  children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.045 0.025
+        children [
+          DEF WHEEL Pose {
+            rotation 1 0 0 1.5707996938995747
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.045 0.025
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    Pose {
+      translation 0 0 0.0415
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    DistanceSensor {
+      translation 0.042 0.02 0.063
+      rotation 0 0 1 0.5236003061004253
+      children [
+        DEF SENSOR Pose {
+          rotation 0 1 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 1 0
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.004
+                radius 0.008
+              }
+            }
+          ]
+        }
+      ]
+      name "ds0"
+      lookupTable [
+        0 1020 0
+        0.05 1020 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+    DistanceSensor {
+      translation 0.042 -0.02 0.063
+      rotation 0 0 1 -0.5235996938995747
+      children [
+        USE SENSOR
+      ]
+      name "ds1"
+      lookupTable [
+        0 1020 0
+        0.05 1020 0
+        0.15 0 0
+      ]
+      numberOfRays 2
+      aperture 1
+    }
+  ]
+  name "my_robot"
+  boundingObject Pose {
+    translation 0 0 0.0415
+    children [
+      USE BODY
+    ]
+  }
+  physics Physics {
+  }
+  controller "<extern>"
+}
+Solid {
+  children [
+    Door {
+      translation -24.27 5.04997 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(4)"
+    }
+    Wall {
+      translation 13.31 -4.86999 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(21)"
+      size 0.2 23 2.4
+    }
+    Wall {
+      translation -13.53 -4.82001 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(20)"
+      size 0.2 23.1 2.4
+    }
+    Wall {
+      translation -24.91 -2.63 0
+      name "wall(19)"
+      size 0.2 4.65 2.4
+    }
+    Door {
+      translation -24.91 0.180001 0
+      rotation 0 0 1 3.14159
+      name "door(9)"
+    }
+    Wall {
+      translation -24.9 2.81 0
+      name "wall(18)"
+      size 0.2 4.3 2.4
+    }
+    Wall {
+      translation 24.84 2.75 0
+      name "wall(17)"
+      size 0.2 4.5 2.4
+    }
+    Wall {
+      translation 24.89 -2.74 0
+      name "wall(16)"
+      size 0.2 4.5 2.4
+    }
+    Door {
+      translation 24.87 0 0
+      name "door(8)"
+    }
+    Wall {
+      translation 16.61 5.11001 0.01
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(15)"
+      size 0.2 14.4 2.4
+    }
+    Door {
+      translation 24.25 5.14 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(7)"
+    }
+    Door {
+      translation 8.96 5.11001 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(6)"
+    }
+    Wall {
+      translation 24.85 10.91 0
+      name "wall(14)"
+      size 0.2 11.8 2.4
+    }
+    Wall {
+      translation 16.7 16.87 0.01
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(13)"
+      size 0.2 16.5 2.4
+    }
+    Floor {
+      translation 16.65 11 0
+      name "floor(5)"
+      size 16.6 12
+      appearance CarpetFibers {
+        colorOverride 0 0 0
+      }
+    }
+    Chair {
+      translation 14.55 0.41 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(15)"
+    }
+    Chair {
+      translation 14.67 -2.08 0
+      rotation 0 0 1 1.5708
+      name "chair(14)"
+    }
+    Chair {
+      translation 13.15 -0.73 0
+      name "chair(13)"
+    }
+    Chair {
+      translation 15.95 -0.82 0
+      rotation 0 0 1 3.14159
+      name "chair(12)"
+    }
+    RoundTable {
+      translation 14.62 -0.72 0
+    }
+    Wall {
+      translation 14.46 -4.37 0
+      name "wall(12)"
+      size 0.2 0.2 2.1
+    }
+    Wall {
+      translation 14.46 -3.13 0
+      name "wall(11)"
+      size 0.2 0.2 2.1
+    }
+    Wall {
+      translation 15.48 -3.69998 0.7
+      rotation 0.5773509358560258 0.577349935856137 0.577349935856137 2.09439
+      name "wall(10)"
+      size 1.322 1.5 2.4
+    }
+    StraightStairs {
+      translation 16.28 -3.7 1.46
+      rotation 0 0 1 3.14159
+      name "straight stairs(1)"
+      stepAppearance VarnishedPine {
+        colorOverride 1 1 1
+        textureTransform TextureTransform {
+          scale 4 4
+        }
+      }
+      leftRail [
+        StraightStairsRail {
+          appearance VarnishedPine {
+            colorOverride 0 0 0
+            textureTransform TextureTransform {
+              scale 4 4
+            }
+          }
+        }
+      ]
+      rightRail [
+        StraightStairsRail {
+          appearance VarnishedPine {
+            colorOverride 0 0 0
+            textureTransform TextureTransform {
+              scale 4 4
+            }
+          }
+        }
+      ]
+    }
+    Floor {
+      translation 17.12 -3.65 1.46
+      name "floor(4)"
+      size 1.3 1.3
+      appearance MarbleTiles {
+      }
+    }
+    StraightStairs {
+      translation 17.13 0 0
+      rotation 0 0 1 -1.5707953071795862
+      stepRise 0.2
+      nSteps 8
+      stepAppearance VarnishedPine {
+        colorOverride 1 1 1
+        textureTransform TextureTransform {
+        }
+      }
+      leftRail [
+        StraightStairsRail {
+          run 3.2
+          appearance VarnishedPine {
+            colorOverride 0 0 0
+            textureTransform TextureTransform {
+              scale 4 4
+            }
+          }
+        }
+      ]
+      rightRail [
+        StraightStairsRail {
+          run 3.2
+          appearance VarnishedPine {
+            colorOverride 0 0 0
+            textureTransform TextureTransform {
+              scale 4 4
+            }
+          }
+        }
+      ]
+    }
+    Chair {
+      translation -15.66 11.13 0.02
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(11)"
+    }
+    Chair {
+      translation -16.74 11.15 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(10)"
+    }
+    Chair {
+      translation -17.78 11.13 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(9)"
+    }
+    Chair {
+      translation -23.17 11.3 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(8)"
+    }
+    Chair {
+      translation -22.21 11.26 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(7)"
+    }
+    Chair {
+      translation -24.13 11.38 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(6)"
+    }
+    Table {
+      translation -22.9 10.25 0
+      rotation 0 0 1 -1.5707953071795862
+      name "table(5)"
+      size 1 3.5 0.74
+    }
+    Table {
+      translation -16.56 10.22 0
+      rotation 0 0 1 -1.5707953071795862
+      name "table(4)"
+      size 1 3.5 0.74
+    }
+    Table {
+      translation -16.14 7.04 0
+      rotation 0 0 1 -1.5707953071795862
+      name "table(3)"
+    }
+    Blackboard {
+      translation -19.43 5.23 0.72
+      rotation 0 0 1 1.5708
+      name "blackboard(1)"
+    }
+    Wall {
+      translation -19.19 5.04998 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(9)"
+      size 0.2 9.15 2.4
+    }
+    Wall {
+      translation -19.18 16.98 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(8)"
+      size 0.2 11.4 2.4
+    }
+    Floor {
+      translation -19 11 0
+      name "floor(3)"
+      size 11.5 12
+      appearance CarpetFibers {
+        colorOverride 0 0 0
+      }
+    }
+    Door {
+      hidden translation_5 0.6439221563877231 -0.5371844307628659 0
+      hidden rotation_5 0 0 -1 1.9999999999999996
+      translation -14.12 5.06 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(5)"
+    }
+    Wall {
+      translation -24.89 10.96 0
+      name "wall(7)"
+      size 0.2 12 2.4
+    }
+    Door {
+      hidden translation_5 1.731400151421243 -0.7825237691740474 0
+      hidden rotation_5 0 0 -1 0.9999999999999998
+      translation 4.01721e-06 -4.82 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(3)"
+      size 0.2 4 2.4
+    }
+    Chair {
+      translation -4.72 11.08 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(5)"
+    }
+    Chair {
+      translation -5.85001 10.99 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(4)"
+    }
+    Chair {
+      translation -7.02001 11.03 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(3)"
+    }
+    Chair {
+      translation -10.48 11.17 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(2)"
+    }
+    Chair {
+      translation -12.62 11.2 0
+      rotation 0 0 1 -1.5707953071795862
+    }
+    Chair {
+      translation -11.5 11.23 0
+      rotation 0 0 1 -1.5707953071795862
+      name "chair(1)"
+    }
+    Table {
+      translation -11.56 10.19 0.01
+      rotation 0 0 1 -1.5707953071795862
+      name "table(1)"
+      size 1 3.5 0.74
+    }
+    Table {
+      translation -5.22 6.8 0
+      rotation 0 0 1 -1.5707953071795862
+    }
+    Blackboard {
+      translation -7.7 5.29 0.72
+      rotation 0 0 1 1.5708
+    }
+    Wall {
+      translation -7.97 5.18 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(6)"
+      size 0.2 8.85 2.4
+    }
+    Door {
+      hidden translation_5 0.6439221563877231 -0.5371844307628659 0
+      hidden rotation_5 0 0 -1 1.9999999999999996
+      translation -3.06 5.17 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(2)"
+    }
+    Door {
+      hidden translation_5 0.6439221563877231 -0.5371844307628659 0
+      hidden rotation_5 0 0 -1 1.9999999999999996
+      translation -12.89 5.18999 0
+      rotation 0 0 1 -1.5707953071795862
+      name "door(1)"
+    }
+    Table {
+      translation -5.78 10.17 0
+      rotation 0 0 1 1.5708
+      name "table(2)"
+      size 1 3.5 0.74
+    }
+    Floor {
+      translation -8 11 0
+      name "floor(2)"
+      size 11 12
+      appearance CarpetFibers {
+        colorOverride 0 0 0
+      }
+    }
+    Wall {
+      translation -8 17.09 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(5)"
+      size 0.2 11 2.4
+    }
+    Wall {
+      translation -13.51 11 0
+      name "wall(4)"
+      size 0.2 12 2.4
+    }
+    SnackStand {
+      translation -0.93 8.02 0
+    }
+    Door {
+      hidden translation_5 0.36454088582190336 -0.9242195546842913 0
+      hidden rotation_5 0 0 -1 3
+      translation 2.73 16.82 0
+      rotation 0 0 1 -1.5707953071795862
+      wallAppearance Roughcast {
+        colorOverride 1 0 0
+      }
+    }
+    Wall {
+      translation -0.080001 17.04 0
+      rotation 0 0 1 -1.5707953071795862
+      name "wall(3)"
+      size 0.2 4.6 2.4
+      appearance Roughcast {
+        colorOverride 1 0 0
+        textureTransform TextureTransform {
+          scale 2.4 1
+        }
+      }
+    }
+    Wall {
+      translation 5.73 16.96 0
+      rotation 0 0 1 1.5708
+      name "wall(2)"
+      size 0.2 5 2.4
+      appearance Roughcast {
+        colorOverride 1 0 0
+        textureTransform TextureTransform {
+          scale 2.4 1
+        }
+      }
+    }
+    Floor {
+      translation 3 11 0
+      name "floor(1)"
+      size 11 12
+      appearance MarbleTiles {
+      }
+    }
+    Wall {
+      translation 8.36 10.99 0
+      name "wall(1)"
+      size 0.2 12 2.4
+    }
+    Wall {
+      translation -2.49 11 0
+      size 0.2 12 2.4
+    }
+    Floor {
+      size 50 10
+      appearance MarbleTiles {
+      }
+    }
+  ]
+}
